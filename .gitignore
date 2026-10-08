@@ -1,0 +1,33 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+dist/
+build/
+deployment/
+*.egg-info/
+*.log
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+
+# Personal recordings and fitted gesture models (not bundled perception assets)
+/CarlCam/
+/data/
+/datasets/
+/recordings/
+/models/
+*.pt
+*.pth
+*.npz
+
+# Local editor settings
+.idea/
+.vscode/
+
+# Internal Figma connection and local review receipts; keep authoring recipes
+/design/*state.json
+/design/sdk-retired-privacy-wording-audit-20261004.json

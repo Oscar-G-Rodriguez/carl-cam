@@ -1,0 +1,31 @@
+Carl-Cam development build
+
+Carl-Cam processes live camera images locally. It does not save photos or video.
+MediaPipe may send performance and usage metrics to Google; its input images
+and video are processed on this computer and are not sent to Google.
+Personal gesture training saves numerical examples only when you opt in.
+No trained gesture demo is bundled yet: choose personal training or mouse/keyboard.
+
+The camera and optional virtual output are off when Carl-Cam opens. This installer
+does not install OBS, camera drivers, Python or a CUDA toolkit. OBS Virtual Camera
+is a separate prerequisite if you want outgoing video.
+
+CPU masking is the default. The experimental NVIDIA masking component is bundled;
+try it from Settings > Camera, save, then stop and restart the camera. It needs a
+compatible NVIDIA GPU and driver. A missing or failed GPU path falls back to CPU.
+Bundled runtime libraries do not require a separate CUDA toolkit installation.
+
+Personal neural training also has a separate optional "Train on NVIDIA GPU"
+choice when reviewing recordings. CPU training remains the default. GPU fitting
+requires a compatible NVIDIA card and driver; failures are reported with a CPU
+retry. Finished models remain CPU-loadable. This choice does not change the
+masking processor, and GPU training is not guaranteed to be faster for small
+gesture networks.
+
+Close Carl-Cam before updating. Uninstall removes program files and shortcuts;
+your local numerical recordings, personal models and settings remain. Use the
+app's Settings to remove your recordings/models separately.
+
+This is an unsigned development build, not an approved public release. Real-person
+gesture checks, live camera/OBS tests, final graphics, performance tuning and
+clean Windows testing remain required. No successful checks are assumed.

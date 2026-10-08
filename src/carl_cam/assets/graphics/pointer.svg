@@ -1,0 +1,14 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Menu/Pointer">
+<g id="Hand pointer" clip-path="url(#clip0_9_63)">
+<path id="Vector" d="M16 1L21 11L31 16L21 21L16 31L11 21L1 16L11 11L16 1Z" fill="#F1ECE2" stroke="#111014" stroke-width="2"/>
+<path id="Vector_2" d="M16 21C18.7614 21 21 18.7614 21 16C21 13.2386 18.7614 11 16 11C13.2386 11 11 13.2386 11 16C11 18.7614 13.2386 21 16 21Z" fill="#C21E29"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_9_63">
+<rect width="32" height="32" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+

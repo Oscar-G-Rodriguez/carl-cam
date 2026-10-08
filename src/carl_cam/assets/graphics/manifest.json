@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "figma_file": "GOpu9lAhmkGMvEg8aUzi8q",
+  "origin": "Original Carl-Cam editable Figma artwork, retained SVG exports",
+  "assets": {
+    "icon-check.svg": {
+      "sha256": "e307b879b76cc6a85a6843498b9f9b203f237ba679146e66349fd014f4df9571",
+      "bytes": 211,
+      "figma_node": "33:118",
+      "width": 14,
+      "height": 14
+    },
+    "border-red.svg": {
+      "sha256": "484d8e2e5f0e7feb31ca3b5b6f18c801328aea6a6ebdafe06951c47d81c27923",
+      "bytes": 662,
+      "figma_node": "7:2",
+      "width": 640,
+      "height": 360
+    },
+    "border-yellow.svg": {
+      "sha256": "26f0aac8be90d0f9a7dba74092b831a362e9c3de5700f94c39cb96e5ac364ce5",
+      "bytes": 2427,
+      "figma_node": "7:8",
+      "width": 640,
+      "height": 360
+    },
+    "border-blue.svg": {
+      "sha256": "a302f48853a6830d98e8086f844a42a1d7fd35770836030e9506c6573a854e25",
+      "bytes": 784,
+      "figma_node": "7:16",
+      "width": 640,
+      "height": 360
+    },
+    "menu-back.svg": {
+      "sha256": "4c21a1500180dfe3fb0fc55c2578b23fe83319c1f4c17a0cf8620e756e20981e",
+      "bytes": 6692,
+      "figma_node": "9:40",
+      "width": 240,
+      "height": 90
+    },
+    "pointer.svg": {
+      "sha256": "718ab944c7a92831eaa8cd01b90a091b04027044cc8bf4d745d890089f6a08f6",
+      "bytes": 572,
+      "figma_node": "9:63",
+      "width": 32,
+      "height": 32
+    },
+    "icon-close.svg": {
+      "sha256": "e50cae660df27b67c8b9e690e7dd6c70082346bad497a33932053c0e73d17d22",
+      "bytes": 275,
+      "figma_node": "9:42",
+      "width": 24,
+      "height": 24
+    },
+    "icon-minimize.svg": {
+      "sha256": "9f1ea0468a0c300e4717e44f920f49892c467b762a253fe0f44dab681cd6bfdc",
+      "bytes": 266,
+      "figma_node": "9:45",
+      "width": 24,
+      "height": 24
+    },
+    "icon-maximize.svg": {
+      "sha256": "0830983edf3fff6cf862c5e5b1f8e6a0d21962e062b6ecd3b364c9e3f961a373",
+      "bytes": 273,
+      "figma_node": "9:48",
+      "width": 24,
+      "height": 24
+    },
+    "icon-camera.svg": {
+      "sha256": "a4cd38cf82483e54c806e30b9c8c139e929b6e99d49771eaa0b3dc4f0c6d71ea",
+      "bytes": 291,
+      "figma_node": "9:54",
+      "width": 24,
+      "height": 24
+    },
+    "icon-train.svg": {
+      "sha256": "404bdea6fba6c756bf2e108ed28cb628c36481119c0b9001573e453eae00e2e2",
+      "bytes": 319,
+      "figma_node": "9:57",
+      "width": 24,
+      "height": 24
+    },
+    "icon-inspect.svg": {
+      "sha256": "08a536644e3947481015884f9f9d9366ac084642db82ba1e148b547e196f8d9a",
+      "bytes": 299,
+      "figma_node": "9:60",
+      "width": 24,
+      "height": 24
+    },
+    "menu-red-default.svg": {
+      "sha256": "27f9420dc35bdc8061f4684cf4d8ddc00cdb2faa7f7731adb4cdb8bc38d7c32e",
+      "bytes": 5228,
+      "figma_node": "7:24",
+      "width": 300,
+      "height": 100
+    },
+    "menu-red-hover.svg": {
+      "sha256": "2c6b17864fbdcc77ceb366c31fb40ec0fdabc41ddd32903b390193b8d74e7460",
+      "bytes": 5334,
+      "figma_node": "7:30",
+      "width": 300,
+      "height": 100
+    },
+    "menu-red-focused.svg": {
+      "sha256": "b5afb65d14c58e96761c4664e5fe7bea1477fa951b86a61ce09c122bb5defb4a",
+      "bytes": 5338,
+      "figma_node": "7:37",
+      "width": 300,
+      "height": 100
+    },
+    "menu-red-selected.svg": {
+      "sha256": "f944082d49bea134167944ba7170515bb60ba0cf2bbf8bcc68dba0b15f75f9da",
+      "bytes": 5418,
+      "figma_node": "7:44",
+      "width": 300,
+      "height": 100
+    },
+    "menu-yellow-default.svg": {
+      "sha256": "97f3e9fe49bebb3ee125a0fede44a9c2a2afe9414ecb1323df80e3a2435a3041",
+      "bytes": 4846,
+      "figma_node": "7:51",
+      "width": 300,
+      "height": 100
+    },
+    "menu-yellow-hover.svg": {
+      "sha256": "6891ec8714540b07ebe0a4f7394ce41ce90e56e69bd922388f4870f4f2085a28",
+      "bytes": 4953,
+      "figma_node": "7:57",
+      "width": 300,
+      "height": 100
+    },
+    "menu-yellow-focused.svg": {
+      "sha256": "8ed798f632b3a099a3cce60619f07fb364a61329d5c0f29c5432913a381c6de2",
+      "bytes": 4957,
+      "figma_node": "7:64",
+      "width": 300,
+      "height": 100
+    },
+    "menu-yellow-selected.svg": {
+      "sha256": "545e5a177b7d8554b794e4359861281b54059da40ba6d2a28e5e92f2e8d66004",
+      "bytes": 5037,
+      "figma_node": "7:71",
+      "width": 300,
+      "height": 100
+    },
+    "menu-blue-default.svg": {
+      "sha256": "4744b09730217f7fb2b3125085e86c133aad92f0fd0df9aa7204eb5f8649b860",
+      "bytes": 5054,
+      "figma_node": "7:78",
+      "width": 300,
+      "height": 100
+    },
+    "menu-blue-hover.svg": {
+      "sha256": "60e23f285219e8e1a1c5c5e913a635e7228c30208a766505020f66c269ccc6d1",
+      "bytes": 5161,
+      "figma_node": "7:84",
+      "width": 300,
+      "height": 100
+    },
+    "menu-blue-focused.svg": {
+      "sha256": "ddef084ccd174530b8a1aab009e43d0fd374ef1a62fdd4a54a3529535c07106d",
+      "bytes": 5165,
+      "figma_node": "7:91",
+      "width": 300,
+      "height": 100
+    },
+    "menu-blue-selected.svg": {
+      "sha256": "1e210a59ae4322e942d7d328573e279a552326af63fcc53511cacfdde27cb573",
+      "bytes": 5245,
+      "figma_node": "7:98",
+      "width": 300,
+      "height": 100
+    }
+  },
+  "contains_live_filter_pixels": false
+}

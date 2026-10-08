@@ -1,0 +1,10 @@
+const page=await figma.getNodeByIdAsync('0:1');
+await figma.setCurrentPageAsync(page);
+const [root,viewport,body]=await Promise.all(['59:532','60:684','60:685'].map(id=>figma.getNodeByIdAsync(id)));
+const texts=root.findAllWithCriteria({types:['TEXT']});
+const fonts=[...new Map(texts.flatMap(n=>n.getStyledTextSegments(['fontName'])).map(s=>[JSON.stringify(s.fontName),s.fontName])).values()];
+await Promise.all(fonts.map(f=>figma.loadFontAsync(f)));
+const scrollMaximum=Math.max(0,body.height+2-viewport.height);
+body.y=1-scrollMaximum;
+await root.screenshot({scale:1});
+return {createdNodeIds:[],mutatedNodeIds:[body.id],rootId:root.id,scrollMaximum,bodyY:body.y,bodyHeight:body.height,viewportHeight:viewport.height,scrollSnapshotOnly:true};

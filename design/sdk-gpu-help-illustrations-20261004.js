@@ -1,0 +1,12 @@
+const page = await figma.getNodeByIdAsync('0:1');
+await figma.setCurrentPageAsync(page);
+const [root,hold,privacy] = await Promise.all(['59:532','60:683','60:707'].map(id=>figma.getNodeByIdAsync(id)));
+const texts = root.findAllWithCriteria({types:['TEXT']});
+const fonts = [...new Map(texts.flatMap(n=>n.getStyledTextSegments(['fontName'])).map(s=>[JSON.stringify(s.fontName),s.fontName])).values()];
+await Promise.all(fonts.map(f=>figma.loadFontAsync(f)));
+hold.characters='Hand controls and training are on hold because the vision runtime is missing or unsupported. Use mouse/keyboard for now. Saved recordings and models are unchanged.';
+hold.visible=false;
+privacy.setProperties({'Body#60:1':'Processing and training run locally. MediaPipe may send performance and usage metrics to Google;
+its input images and video are not sent to Google. Carl-Cam does not save photos/video, upload training samples, or start output automatically. Numerical rows and models stay in your local data folder. Settings can delete samples or models after confirmation. Creator export contains models without recordings and remains a candidate pending release tests.'});
+await root.screenshot({scale:1});
+return {createdNodeIds:[],mutatedNodeIds:[hold.id,privacy.id,...privacy.findAllWithCriteria({types:['TEXT']}).map(n=>n.id)],rootId:root.id,holdVisible:hold.visible,fontFamilies:[...new Set(texts.flatMap(n=>n.getStyledTextSegments(['fontName'])).map(s=>s.fontName.family))],privacyBody:privacy.componentProperties['Body#60:1'].value,graphicsUnchanged:true};

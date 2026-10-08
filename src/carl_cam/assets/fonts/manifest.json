@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "assets": {
+    "Arimo.ttf": {
+      "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/arimo/Arimo%5Bwght%5D.ttf",
+      "sha256": "e43898b143ec826ac8cb4034816458a7047fbe0836558de2a1f8c6223ae3e0ca",
+      "bytes": 496268,
+      "license": "OFL-1.1"
+    },
+    "OFL.txt": {
+      "origin": "https://raw.githubusercontent.com/google/fonts/main/ofl/arimo/OFL.txt",
+      "sha256": "11cce536cd2f3864d767003af5dcd739e2e15818cf2279b6175edeadd3960992",
+      "bytes": 4384,
+      "license": "OFL-1.1"
+    }
+  }
+}

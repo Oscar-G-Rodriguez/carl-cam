@@ -1,0 +1,150 @@
+{
+  "fileKey": "GOpu9lAhmkGMvEg8aUzi8q",
+  "exported": [
+    {
+      "name": "icon-check",
+      "nodeId": "33:118",
+      "width": 14,
+      "height": 14
+    },
+    {
+      "name": "border-red",
+      "nodeId": "7:2",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "name": "border-yellow",
+      "nodeId": "7:8",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "name": "border-blue",
+      "nodeId": "7:16",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "name": "menu-back",
+      "nodeId": "9:40",
+      "width": 240,
+      "height": 90
+    },
+    {
+      "name": "pointer",
+      "nodeId": "9:63",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "name": "icon-close",
+      "nodeId": "9:42",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "name": "icon-minimize",
+      "nodeId": "9:45",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "name": "icon-maximize",
+      "nodeId": "9:48",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "name": "icon-camera",
+      "nodeId": "9:54",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "name": "icon-train",
+      "nodeId": "9:57",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "name": "icon-inspect",
+      "nodeId": "9:60",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "name": "menu-red-default",
+      "nodeId": "7:24",
+      "width": 300,
+      "height": 100
+    },
+    {
+      "name": "menu-red-hover",
+      "nodeId": "7:30",
+      "width": 300,
+      "height": 100
+    },
+    {
+      "name": "menu-red-focused",
+      "nodeId": "7:37",
+      "width": 300,
+      "height": 100
+    },
+    {
+      "name": "menu-red-selected",
+      "nodeId": "7:44",
+      "width": 300,
+      "height": 100
+    },
+    {
+      "name": "menu-yellow-default",
+      "nodeId": "7:51",
+      "width": 300,
+      "height": 100
+    },
+    {
+      "name": "menu-yellow-hover",
+      "nodeId": "7:57",
+      "width": 300,
+      "height": 100
+    },
+    {
+      "name": "menu-yellow-focused",
+      "nodeId": "7:64",
+      "width": 300,
+      "height": 100
+    },
+    {
+      "name": "menu-yellow-selected",
+      "nodeId": "7:71",
+      "width": 300,
+      "height": 100
+    },
+    {
+      "name": "menu-blue-default",
+      "nodeId": "7:78",
+      "width": 300,
+      "height": 100
+    },
+    {
+      "name": "menu-blue-hover",
+      "nodeId": "7:84",
+      "width": 300,
+      "height": 100
+    },
+    {
+      "name": "menu-blue-focused",
+      "nodeId": "7:91",
+      "width": 300,
+      "height": 100
+    },
+    {
+      "name": "menu-blue-selected",
+      "nodeId": "7:98",
+      "width": 300,
+      "height": 100
+    }
+  ],
+  "pending": "Remaining desktop screen designs and native visual checks remain pending. All twelve approved menu states, revised borders and the original checkbox tick are exported from the owner-selected Figma file; real webcam fidelity remains unverified."
+}

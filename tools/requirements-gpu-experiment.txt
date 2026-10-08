@@ -1,0 +1,17 @@
+# Private developer experiment only; never install over Carl-Cam's app environment.
+# Environment-local CUDA 13.0 / cuDNN 9.13 wheels; not a system toolkit.
+# Installation and static checks do not approve native loading or GPU execution.
+tf2onnx==1.17.0
+tensorflow==2.20.0
+onnx==1.19.1
+numpy==2.2.6
+tflite==2.18.0
+onnxruntime-gpu[cuda,cudnn]==1.30.0
+opencv-contrib-python==5.0.0.93
+nvidia-cuda-runtime==13.0.96
+nvidia-cuda-nvrtc==13.0.88
+nvidia-cublas==13.0.2.14
+nvidia-cufft==12.0.0.61
+nvidia-curand==10.4.0.35
+nvidia-nvjitlink==13.0.88
+nvidia-cudnn-cu13==9.13.1.26

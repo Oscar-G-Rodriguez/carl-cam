@@ -1,0 +1,203 @@
+diff --git a/WORKSPACE b/WORKSPACE
+index 1f57dd8..f9ef8e2 100644
+--- a/WORKSPACE
++++ b/WORKSPACE
+@@ -354,6 +354,31 @@ http_archive(
+     ],
+ )
+ 
++# Carl-Cam Windows build compatibility: retain TensorFlow's exact LLVM archive
++# and all its patches, then replace only build-overlay links with file copies.
++# This avoids requiring Windows Developer Mode or administrator privileges.
++load("@org_tensorflow//third_party:repo.bzl", "tf_http_archive")
++
++tf_http_archive(
++    name = "llvm-raw",
++    sha256 = "e5b78a6368e1f3af078f3a138aac20af55aa300c793e6019ca38e1cb86f20adc",
++    strip_prefix = "llvm-project-7a33569510535f0b917a2e50f644bf57490aee24",
++    urls = [
++        "https://storage.googleapis.com/mirror.tensorflow.org/github.com/llvm/llvm-project/archive/7a33569510535f0b917a2e50f644bf57490aee24.tar.gz",
++        "https://github.com/llvm/llvm-project/archive/7a33569510535f0b917a2e50f644bf57490aee24.tar.gz",
++    ],
++    build_file = "@org_tensorflow//third_party/llvm:llvm.BUILD",
++    patch_file = [
++        "@org_tensorflow//third_party/llvm:generated.patch",
++        "@org_tensorflow//third_party/llvm:build.patch",
++        "@org_tensorflow//third_party/llvm:mathextras.patch",
++        "@org_tensorflow//third_party/llvm:toolchains.patch",
++        "@org_tensorflow//third_party/llvm:zstd.patch",
++        "@//third_party:carl_cam_llvm_windows_copy.diff",
++    ],
++    link_files = {"@org_tensorflow//third_party/llvm:run_lit.sh": "mlir/run_lit.sh"},
++)
++
+ load("@org_tensorflow//tensorflow:workspace3.bzl", "tf_workspace3")
+ 
+ tf_workspace3()
+@@ -609,6 +634,9 @@ http_archive(
+ http_archive(
+     name = "opencv",
+     build_file_content = all_content,
++    sha256 = "10898a0268d8f8cbaf0354ddd1d9de6abaac84e3d9a6c9754f56a0aa3383d73b",
++    patch_args = ["-p1"],
++    patches = ["@//third_party:carl_cam_opencv_msvc_hash.diff"],
+     strip_prefix = "opencv-3.4.11",
+     urls = ["https://github.com/opencv/opencv/archive/3.4.11.tar.gz"],
+ )
+diff --git a/mediapipe/gpu/gpu_service.cc b/mediapipe/gpu/gpu_service.cc
+--- a/mediapipe/gpu/gpu_service.cc
++++ b/mediapipe/gpu/gpu_service.cc
+@@ -16,7 +16,7 @@
+ 
+ namespace mediapipe {
+ 
+-const GraphService<GpuResources> kGpuService(
++ABSL_CONST_INIT const GraphService<GpuResources> kGpuService(
+     "kGpuService", GraphServiceBase::kAllowDefaultInitialization);
+ 
+ }  // namespace mediapipe
+diff --git a/mediapipe/framework/legacy_calculator_support.cc b/mediapipe/framework/legacy_calculator_support.cc
+--- a/mediapipe/framework/legacy_calculator_support.cc
++++ b/mediapipe/framework/legacy_calculator_support.cc
+@@ -17,9 +17,15 @@
+ namespace mediapipe {
+ 
+ template <>
++#if defined(_MSC_VER) && !defined(__clang__)
++ABSL_CONST_INIT
++#endif
+ thread_local CalculatorContext*
+     LegacyCalculatorSupport::Scoped<CalculatorContext>::current_ = nullptr;
+ template <>
++#if defined(_MSC_VER) && !defined(__clang__)
++ABSL_CONST_INIT
++#endif
+ thread_local CalculatorContract*
+     LegacyCalculatorSupport::Scoped<CalculatorContract>::current_ = nullptr;
+ 
+diff --git a/mediapipe/framework/api3/calculator_context.h b/mediapipe/framework/api3/calculator_context.h
+--- a/mediapipe/framework/api3/calculator_context.h
++++ b/mediapipe/framework/api3/calculator_context.h
+@@ -433,6 +433,9 @@
+ 
+-template <typename T, typename U, typename... Rest, int&... DoNotSpecify,
++template <typename T, typename U, typename... Rest,
++#if !defined(_MSC_VER) || defined(__clang__)
++          int&... DoNotSpecify,
++#endif
+           typename F>
+ auto VisitPacketOrDie(F&& visitor, const mediapipe::Packet& packet) {
+   if (packet.ValidateAsType<T>().ok()) {
+     return std::forward<F>(visitor)(packet.Get<T>());
+@@ -449,6 +452,9 @@
+ 
+-template <typename T, typename U, typename... Rest, int&... DoNotSpecify,
++template <typename T, typename U, typename... Rest,
++#if !defined(_MSC_VER) || defined(__clang__)
++          int&... DoNotSpecify,
++#endif
+           typename F>
+ auto VisitPacketAsPacketOrDie(F&& visitor, const mediapipe::Packet& packet) {
+   if (packet.ValidateAsType<T>().ok()) {
+     return std::forward<F>(visitor)(WrapLegacyPacket<T>(packet).value());
+diff --git a/mediapipe/framework/api3/graph.h b/mediapipe/framework/api3/graph.h
+--- a/mediapipe/framework/api3/graph.h
++++ b/mediapipe/framework/api3/graph.h
+@@ -107,6 +107,9 @@
+ class GenericGraph;
+ class FunctionGraphBuilder;
+ 
++template <typename NodeT>
++class SubgraphContext;
++
+ // `GraphNode` is returned by `Graph<...>::AddNode<...>()` function.
+ //
+ // Common pattern to use it:
+diff --git a/third_party/BUILD b/third_party/BUILD
+--- a/third_party/BUILD
++++ b/third_party/BUILD
+@@ -284,12 +284,17 @@ cmake(
+     ],
+     out_shared_libs = select({
+         "@bazel_tools//src/conditions:darwin": ["libopencv_%s.%s.dylib" % (module, OPENCV_SO_VERSION) for module in OPENCV_MODULES],
++        "@bazel_tools//src/conditions:windows": ["opencv_%s3411.dll" % module for module in OPENCV_MODULES],
+         # Only the shared objects listed here will be linked in the directory
+         # that Bazel adds to the RUNPATH of dependent executables. You cannot
+         # list both the versioned and unversioned name of the .so, and the
+         # versioned name is the one that the executables actually reference.
+         "//conditions:default": ["libopencv_%s.so.%s" % (module, OPENCV_SO_VERSION) for module in OPENCV_MODULES],
+     }) if OPENCV_SHARED_LIBS else None,
++    out_interface_libs = select({
++        "@bazel_tools//src/conditions:windows": ["opencv_%s3411.lib" % module for module in OPENCV_MODULES],
++        "//conditions:default": [],
++    }) if OPENCV_SHARED_LIBS else None,
+     out_static_libs = [
+         "libopencv_%s.a" % module
+         for module in OPENCV_MODULES
+diff --git a/third_party/carl_cam_opencv_msvc_hash.diff b/third_party/carl_cam_opencv_msvc_hash.diff
+new file mode 100644
+--- /dev/null
++++ b/third_party/carl_cam_opencv_msvc_hash.diff
+@@ -0,0 +1,14 @@
++diff --git a/3rdparty/protobuf/src/google/protobuf/stubs/hash.h b/3rdparty/protobuf/src/google/protobuf/stubs/hash.h
++--- a/3rdparty/protobuf/src/google/protobuf/stubs/hash.h
+++++ b/3rdparty/protobuf/src/google/protobuf/stubs/hash.h
++@@ -235,7 +235,9 @@
++   HashFcn hash_function() const { return HashFcn(); }
++ };
++ 
++-#elif defined(_MSC_VER) && !defined(_STLPORT_VERSION)
+++// MSVC 2010+ uses the standard unordered containers selected above; its
+++// legacy hash_compare is not in std. Reuse the existing standard hash path.
+++#elif defined(_MSC_VER) && _MSC_VER < 1600 && !defined(_STLPORT_VERSION)
++ 
++ template <typename Key>
++ struct hash : public GOOGLE_PROTOBUF_HASH_COMPARE<Key> {
+diff --git a/third_party/carl_cam_llvm_windows_copy.diff b/third_party/carl_cam_llvm_windows_copy.diff
+new file mode 100644
+index 0000000..55f5c59
+--- /dev/null
++++ b/third_party/carl_cam_llvm_windows_copy.diff
+@@ -0,0 +1,42 @@
++diff --git a/utils/bazel/overlay_directories.py b/utils/bazel/overlay_directories.py
++--- a/utils/bazel/overlay_directories.py
+++++ b/utils/bazel/overlay_directories.py
++@@ -14,6 +14,7 @@
++ import argparse
++ import errno
++ import os
+++import shutil
++ import sys
++ 
++ 
++@@ -66,7 +67,17 @@
++ 
++ 
++ def _symlink_abs(from_path, to_path):
++-    os.symlink(os.path.abspath(from_path), os.path.abspath(to_path))
+++    source = os.path.abspath(from_path)
+++    target = os.path.abspath(to_path)
+++    # Carl-Cam build-only adaptation: identical source bytes without requiring
+++    # Windows symlink privileges. Inference/model code is unchanged.
+++    if os.name == "nt":
+++        if os.path.isdir(source):
+++            shutil.copytree(source, target)
+++        else:
+++            shutil.copy2(source, target)
+++    else:
+++        os.symlink(source, target)
++ 
++ 
++ def main(args):
++diff --git a/utils/bazel/configure.bzl b/utils/bazel/configure.bzl
++--- a/utils/bazel/configure.bzl
+++++ b/utils/bazel/configure.bzl
++@@ -60,7 +60,7 @@
++         "--target",
++         ".",
++     ]
++-    exec_result = repository_ctx.execute(cmd, timeout = 20)
+++    exec_result = repository_ctx.execute(cmd, timeout = 300)
++ 
++     if exec_result.return_code != 0:
++         fail(("Failed to execute overlay script: '{cmd}'\n" +

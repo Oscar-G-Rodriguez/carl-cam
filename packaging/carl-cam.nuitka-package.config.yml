@@ -1,0 +1,11 @@
+---
+# MediaPipe 0.10.35 uses ctypes rather than a directly imported extension.
+# Keep the DLL at its original package-relative path for its offline loader.
+- module-name: 'mediapipe'
+  dlls:
+    - from_filenames:
+        relative_path: 'tasks/c'
+        prefixes:
+          - 'libmediapipe'
+      dest_path: 'mediapipe/tasks/c'
+      when: 'win32'
